@@ -44,9 +44,9 @@ console.log(guessSubmit )
 
 /*---------- Variables (state) ---------*/
 let lettersGuessed = []
-let secretWord = ''
+let secretWord = 120
 let remainingTime = ''
-
+let timeInterval;
 
 
 

@@ -6,32 +6,44 @@
     <link rel="stylesheet" href="style.css">
     <title>"The SuperSaiyan Man"</title>
 </head>
+
+
 <body>
-    <h1 class="Page_Title">The SuperSaiyan Man</h1> 
-    <p><em>Guess the hidden word before timeruns out</em>!</p>
+    <div class="game-container">
+        <!-- Game Header -->
+        <header>
+            <h1 class="Page_Title">The SuperSaiyan Man</h1> 
+            <div id="Instructions"> 
+                <p><em>Guess the hidden word before the timer runs out</em>! 
+                <span id="time">120</span> seconds to guess the word until the timer runs out!!! 
+                Each incorrect guess will bring the superSaiyan closer to being fully drawn. Good luck!</p>
+            </div>
+        </header>
     
-     <div class="game" id="game-board">
+        <div class="timer"  id="timer" >Time Remaining: 120s</div>                                   <!-- Timer-->
+       
         <div class="form">
-           
-            <label for="guessField">Enter a guess:1 letter only </label>
-            <input type="text" min="1" max="1" required id="guessField" class="guessField">
-            <input type="submit" value="Submit guess" class="guessSubmit">
-          
+            <input type="text" id="guessInput" maxlength="1" placeholder="Your Letter Here" />
+            <button id="guessButton">Guess</button>                                             <!-- Submit button -->
         </div>
 
+        
+       <!-- Current Word Display -->
+       <div id="currentWord" class="current-word">_ _ _ _ _ _</div>
 
+       <!-- Guessed Letters Display -->
+       <div id="guessedLetters" class="guessed-letters">Guessed Letters: None</div>
 
-     </div>
+       <!-- Feedback Display -->
+       <div id="feedback" class="feedback"></div>
 
-     <div id="word-display"></div>
-    
+       <!-- Reset Button -->
+       <div class="controls">
+           <button id="resetButton" class="reset-button">Reset Game</button>
 
-
-
-
-
-
-
+        <!-- Spaceman Visual Representation -->
+        <canvas id="spacemanCanvas" width="200" height="250"></canvas>
+    </div>
 
     <script src="script.js" defer></script>
 </body>
