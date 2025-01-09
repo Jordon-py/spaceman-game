@@ -1,4 +1,4 @@
-```My choice of game
+/*My choice of game
     **Spaceman**
 "Spaceman" is a simple guessing game similar to "Hangman." Players guess letters to uncover a hidden word, and each incorrect guess progresses a visual representation of a spaceman until it's fully drawn (representing failure).
 
@@ -6,49 +6,75 @@
 
 - *Spaceman_Reloaded*
 
-Psuedocode
 - 1. Create Game Variables:
+        countdown timer to add urgency and excitement to the game.
+        activeGameWord
 
-     - let listName = []     //create empty list
-     
-
-
-- 2. Display Instructions:
+        - 2. Display Instructions:
 
 - 3. Main Game Loop:
 
 - 4. End of Game:
-```
+*/
 
 /*-------------- Constants -------------*/
+const guessInput = document.getElementById('guessField');
+
 const spaceList = [
-    Planets, //(7 letters)
-    Asteroid, // (8 letters)
-    Universe, // (8 letters),
-    Galactic, // (8 letters),
-    Darkmatter, // (10 letters),
-    Starfield, // (9 letters),
-    Spacewalk, // (9 letters),
-    Telescope,]; // (9 letters),
+  "Planets",   // (7 letters)
+  "Asteroid",  // (8 letters)
+  "Universe",  // (8 letters)
+  "Galactic",  // (8 letters)
+  "Darkmatter",// (10 letters)
+  "Starfield", // (9 letters)
+  "Spacewalk", // (9 letters)
+  "Telescope"  // (9 letters)
+];
+
+const secretWord = spaceList; 
+
+
+
+console.log(spaceList);
+console.log(secretWord);
+console.log(guessInput);
 
 
 /*---------- Variables (state) ---------*/
-let gameWord = ''
+let lettersGuessed = []
 let timer = ''
+let remainingTime = ''
 let player = ''
+
+
+
 
 /*----- Cached Element References  -----*/
 
 
-/*-------------- Functions -------------*/
-function initializeGame() {
-    // randomly select a word, reset guesses, update UI,
-    player.querySelector()
+  /*-------------- Functions -------------*/
 
+// reset guesses, update UI,
+function initializeGame() {
+    
+  let timer = ''
+  let lettersGuessed = []
+  let incorrectGuess = null
+  let remainingTime = ''
+  let player = ''
+    
   }
   
-  function handleGuess() {
-    //  check if 'letter' is in currentWord, handle correctness or penalty.
+function getSecretWord() {
+  const randomIndex = Math.floor(Math.random() * spaceList.length);
+  return spaceList[randomIndex];
+}
+
+
+
+  //  check if 'letter' is in currentWord, handle  penalty.
+  function handleGuess(letter) {
+    
     //  (timer). -10 sec
   }
   
@@ -59,5 +85,6 @@ function initializeGame() {
   
   function checkLoseCondition() {
     //  if guessesRemaining <= 0 or the timer hits 0.
+  }
 
 /*----------- Event Listeners ----------*/

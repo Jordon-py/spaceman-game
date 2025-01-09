@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="script.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>"The SuperSaiyan Man"</title>
 </head>
 <body>
+    <h1 class="Page_Title">The SuperSaiyan Man</h1> 
+    <p><em>Guess the hidden word before timeruns out</em>!</p>
     
+     <div class="game" id="game-board">
+        <div class="form">
+           
+            <label for="guessField">Enter a guess: </label>
+            <input type="number" min="1" max="100" required id="guessField" class="guessField">
+            <input type="submit" value="Submit guess" class="guessSubmit">
+          
+        </div>
+
+
+
+     </div>
+
+     <div id="word-display"></div>
+    
+
+
+
+
+
+
+
+
+    <script src="script.js" defer></script>
 </body>
 </html>
