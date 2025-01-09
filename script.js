@@ -19,6 +19,9 @@
 
 /*-------------- Constants -------------*/
 const guessInput = document.getElementById('guessField');
+const guessSubmit = document.querySelector(".guessSubmit");
+
+
 
 const spaceList = [
   "Planets",   // (7 letters)
@@ -31,20 +34,19 @@ const spaceList = [
   "Telescope"  // (9 letters)
 ];
 
-const secretWord = spaceList; 
+
 
 
 
 console.log(spaceList);
-console.log(secretWord);
 console.log(guessInput);
-
+console.log(guessSubmit )
 
 /*---------- Variables (state) ---------*/
 let lettersGuessed = []
-let timer = ''
+let secretWord = ''
 let remainingTime = ''
-let player = ''
+
 
 
 
@@ -56,12 +58,11 @@ let player = ''
 
 // reset guesses, update UI,
 function initializeGame() {
-    
-  let timer = ''
-  let lettersGuessed = []
-  let incorrectGuess = null
-  let remainingTime = ''
-  let player = ''
+  secretWord = getSecretWord().toLowerCase;
+  lettersGuessed = [];
+  incorrectGuess = [];
+  remainingTime = 60;
+  
     
   }
   
