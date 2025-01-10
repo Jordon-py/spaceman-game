@@ -1,10 +1,10 @@
-.container {
-    display: flex; /* or inline-flex */
-    flex-direction: row;
-  }
 
 
 body {
-    font-family: fantasy;
-    line-height: normal;
-}
+  border: 2px;  
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+
+  }

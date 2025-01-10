@@ -18,8 +18,13 @@
 */
 
 /*-------------- Constants -------------*/
-const guessInput = document.getElementById('guessField');
-const guessSubmit = document.querySelector(".guessSubmit");
+const guessInput = document.getElementById('guessInput');
+const guessButton = document.getElementById('guessButton');
+const guessedLettersDiv = document.getElementById('guessedLetters');
+const feedbackDiv = document.getElementById('feedback');
+const resetButton = document.getElementById('resetButton');
+const spacemanCanvas = document.getElementById('spacemanCanvas');
+const timerDisplay = document.getElementById('time');
 
 
 
@@ -35,12 +40,15 @@ const spaceList = [
 ];
 
 
-
-
-
+console.log(guessedLettersDiv);
 console.log(spaceList);
 console.log(guessInput);
-console.log(guessSubmit )
+console.log(guessButton);
+console.log(feedbackDiv);
+console.log(resetButton);
+console.log(spacemanCanvas);
+console.log(timerDisplay);
+
 
 /*---------- Variables (state) ---------*/
 let lettersGuessed = []
