@@ -19,12 +19,14 @@
 
 /*-------------- Constants -------------*/
 const guessInput = document.getElementById('guessInput');
-const guessButton = document.getElementById('guessButton');
+const submitButton = document.getElementById('submitButton');
 const guessedLettersDiv = document.getElementById('guessedLetters');
 const feedbackDiv = document.getElementById('feedback');
 const resetButton = document.getElementById('resetButton');
 const spacemanCanvas = document.getElementById('spacemanCanvas');
 const timerDisplay = document.getElementById('time');
+const currentWord = document.getElementById('currentWord');
+const currentWordLetters = document.querySelectorAll('.letter')
 
 
 
@@ -40,20 +42,11 @@ const spaceList = [
 ];
 
 
-console.log(guessedLettersDiv);
-console.log(spaceList);
-console.log(guessInput);
-console.log(guessButton);
-console.log(feedbackDiv);
-console.log(resetButton);
-console.log(spacemanCanvas);
-console.log(timerDisplay);
-
 
 /*---------- Variables (state) ---------*/
 let lettersGuessed = []
-let secretWord = 120
-let remainingTime = ''
+let secretWord = '';
+let remainingTime = 120;
 let timeInterval;
 
 
@@ -63,26 +56,63 @@ let timeInterval;
 
 
   /*-------------- Functions -------------*/
+initializeGame()
+
 
 // reset guesses, update UI,
 function initializeGame() {
-  secretWord = getSecretWord().toLowerCase;
-  lettersGuessed = [];
-  incorrectGuess = [];
-  remainingTime = 60;
+  secretWord = getSecretWord();
+  secretWord = secretWord.split('')
+  console.log(secretWord);
   
+  lettersGuessed = [];
+  remainingTime = 120;
+  
+  secretWord.forEach((letter, i) => {
+    let emptyspace = document.createElement('span')
+    emptyspace.setAttribute('id', i)
+    emptyspace.setAttribute('class', 'letter')
+    emptyspace.innerText = '_'
+    currentWord.appendChild(emptyspace)
+    
+  });
     
   }
   
 function getSecretWord() {
   const randomIndex = Math.floor(Math.random() * spaceList.length);
-  return spaceList[randomIndex];
+  return spaceList[randomIndex].toLowerCase();
+
 }
 
 
 
   //  check if 'letter' is in currentWord, handle  penalty.
-  function handleGuess(letter) {
+function handleGuess() {
+  let guessedLetter = guessInput.value.toLowerCase()
+  console.log(guessedLetter);
+
+
+  if (lettersGuessed.includes(guessedLetter)) {
+    alert('Already used letter!')
+    return
+  }
+
+  if (secretWord.includes(guessedLetter)) {
+    // Reaveal letter in current
+    secretWord.forEach((letter, i) => {
+      let emptyspace = document.getElementById(i)
+      if (letter == guessedLetter) emptyspace.innerText = letter
+    })
+  } else {
+    lettersGuessed.push(guessedLetter)
+    console.log(lettersGuessed);
+    // push guessedLetter into letters guessed
+  }
+
+  
+  
+    
     
     //  (timer). -10 sec
   }
@@ -97,3 +127,5 @@ function getSecretWord() {
   }
 
 /*----------- Event Listeners ----------*/
+// event listerners for buttons
+submitButton.addEventListener('click', handleGuess)

@@ -24,12 +24,12 @@
        
         <div class="form">
             <input type="text" id="guessInput" maxlength="1" placeholder="Your Letter Here" />
-            <button id="guessButton">Guess</button>                                             <!-- Submit button -->
+            <button type="submit" id="submitButton">Guess</button>                                             <!-- Submit button -->
         </div>
 
         
        <!-- Current Word Display -->
-       <div id="currentWord" class="current-word">_ _ _ _ _ _</div>
+       <div id="currentWord" class="current-word"></div>
 
        <!-- Guessed Letters Display -->
        <div id="guessedLetters" class="guessed-letters">Guessed Letters: None</div>
@@ -45,6 +45,6 @@
         <canvas id="spacemanCanvas" width="200" height="250"></canvas>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
