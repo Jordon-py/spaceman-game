@@ -1,4 +1,15 @@
+container {
+  display: flex;
+  flex-direction: column;
+}
 
+.container > .top {
+  flex: 0 0 100px;
+}
+
+.container > .content {
+  flex: 1 0 auto;
+}
 
 body {
   border: 2px;  

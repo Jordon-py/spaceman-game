@@ -24,7 +24,7 @@ const guessedLettersDiv = document.getElementById('guessedLetters')
 const timerDisplay = document.getElementById('time');
 const currentWord = document.getElementById('currentWord');
 const currentWordLetters = document.querySelectorAll('.letter')
-const startTimerButton = document.getElementById('startTimer');
+const startTimerButton = document.getElementById('timer');
 
 const feedbackDiv = document.getElementById('feedback');
 const spacemanCanvas = document.getElementById('spacemanCanvas');
@@ -55,8 +55,8 @@ console.log(guessedLettersDiv);
 let lettersGuessed = []
 let secretWord = '';
 let remainingTime = 120;
-let timeInterval= null;
-currentWordLetters = []
+let timeInterval= '';
+
 
 
 
@@ -75,7 +75,7 @@ function initializeGame() {
     currentWord.setAttribute('id', i)
     currentWord.setAttribute('class', 'letter')
     currentWord.innerText = '_'
-    currentWord.appendChild(currentWord)
+    currentWord.appendChild(i)
     
   });
     
@@ -83,32 +83,34 @@ function initializeGame() {
   
 function getSecretWord() {
   const randomIndex = Math.floor(Math.random() * spaceList.length);
-  return spaceList[randomIndex].toLowerCase();
-}
+  return secretWord[randomIndex].toLowerCase()};
 
 
 
   //  check if 'letter' is in currentWord, handle  penalty.
 function handleGuess() {
   
-  let guessedLetter = guessInput.value.toLowerCase()     // console.log(guessedLetter);
-  if (lettersGuessed.includes(guessedLetter)) {
+  let guessedLettersDiv = guessInput.value.toLowerCase()     // console.log(guessedLetter);
+  if (lettersGuessed.includes(guessedLettersDiv)) {
     alert('Already used letter!')
     return
   }
 
-  if (secretWord.includes(guessedLetter)) {
+  if (secretWord.includes(guessedLettersDiv)) {
     // Reaveal letter in currentWord
-    secretWord.forEach((letter, i) => {
+    secretWord.forEach((letter, i) =>  {
       let currentWord = document.getElementById(i)
-      if (letter == guessedLetter) currentWord.innerText = letter
+      if(letter == guessedLetter) currentWord.innerText = letter
     })
-  } else {
-    lettersGuessed.push(guessedLetter)
-    console.log(lettersGuessed);
-    // push guessedLetter into letters guessed
-
+    
+    feedbackDiv.textContent = `You guessed "${guessedLetter}"`;
   }
+  
+  else {
+    lettersGuessed.push(guessedLettersDiv);    // push guessedLetter into letters guessed
+    let timerDisplay
+    console.log(lettersGuessed);
+   }
 
   
   
@@ -127,6 +129,20 @@ function handleGuess() {
       
     }
   }
+
+  function startTimer() {
+    timeInterval = setInterval(() => {
+        remainingTime--;
+        timerDisplay.textContent = remainingTime;
+        
+        if (remainingTime <= 0) {
+            clearInterval(timeInterval);
+            endGame(false); // Player loses
+        }
+    }, 1000);
+}
+
+
 
 
 let endgame = null
