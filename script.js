@@ -5,29 +5,29 @@
 ---
 
 - *Spaceman_Reloaded*
-
 - 1. Create Game Variables:
-        countdown timer to add urgency and excitement to the game.
-        activeGameWord
+    countdown timer to add urgency and excitement to the game.
+    activeGameWord
 
-        - 2. Display Instructions:
-
+- 2. Display Instructions:
 - 3. Main Game Loop:
-
 - 4. End of Game:
 */
 
 /*-------------- Constants -------------*/
 const guessInput = document.getElementById('guessInput');
 const submitButton = document.getElementById('submitButton');
-const guessedLettersDiv = document.getElementById('guessedLetters');
-const feedbackDiv = document.getElementById('feedback');
 const resetButton = document.getElementById('resetButton');
-const spacemanCanvas = document.getElementById('spacemanCanvas');
+
+const guessedLettersDiv = document.getElementById('guessedLetters')
+
 const timerDisplay = document.getElementById('time');
 const currentWord = document.getElementById('currentWord');
 const currentWordLetters = document.querySelectorAll('.letter')
+const startTimerButton = document.getElementById('startTimer');
 
+const feedbackDiv = document.getElementById('feedback');
+const spacemanCanvas = document.getElementById('spacemanCanvas');
 
 
 const spaceList = [
@@ -40,6 +40,14 @@ const spaceList = [
   "Spacewalk", // (9 letters)
   "Telescope"  // (9 letters)
 ];
+console.log(spacemanCanvas);
+console.log(resetButton);
+console.log(currentWordLetters);
+console.log(currentWord);
+console.log(submitButton);
+console.log(timerDisplay);
+console.log(feedbackDiv);
+console.log(guessedLettersDiv);
 
 
 
@@ -47,33 +55,27 @@ const spaceList = [
 let lettersGuessed = []
 let secretWord = '';
 let remainingTime = 120;
-let timeInterval;
+let timeInterval= null;
+currentWordLetters = []
 
-
-
-
-/*----- Cached Element References  -----*/
 
 
   /*-------------- Functions -------------*/
-initializeGame()
 
-
-// reset guesses, update UI,
 function initializeGame() {
-  secretWord = getSecretWord();
-  secretWord = secretWord.split('')
-  console.log(secretWord);
-  
+  secretWord = getSecretWord().split('');     // reset game variables
   lettersGuessed = [];
   remainingTime = 120;
+  clearInterval(timeInterval)
+
+  // clear Display
   
   secretWord.forEach((letter, i) => {
-    let emptyspace = document.createElement('span')
-    emptyspace.setAttribute('id', i)
-    emptyspace.setAttribute('class', 'letter')
-    emptyspace.innerText = '_'
-    currentWord.appendChild(emptyspace)
+    let currentWord = document.createElement('span')
+    currentWord.setAttribute('id', i)
+    currentWord.setAttribute('class', 'letter')
+    currentWord.innerText = '_'
+    currentWord.appendChild(currentWord)
     
   });
     
@@ -82,32 +84,30 @@ function initializeGame() {
 function getSecretWord() {
   const randomIndex = Math.floor(Math.random() * spaceList.length);
   return spaceList[randomIndex].toLowerCase();
-
 }
 
 
 
   //  check if 'letter' is in currentWord, handle  penalty.
 function handleGuess() {
-  let guessedLetter = guessInput.value.toLowerCase()
-  console.log(guessedLetter);
-
-
+  
+  let guessedLetter = guessInput.value.toLowerCase()     // console.log(guessedLetter);
   if (lettersGuessed.includes(guessedLetter)) {
     alert('Already used letter!')
     return
   }
 
   if (secretWord.includes(guessedLetter)) {
-    // Reaveal letter in current
+    // Reaveal letter in currentWord
     secretWord.forEach((letter, i) => {
-      let emptyspace = document.getElementById(i)
-      if (letter == guessedLetter) emptyspace.innerText = letter
+      let currentWord = document.getElementById(i)
+      if (letter == guessedLetter) currentWord.innerText = letter
     })
   } else {
     lettersGuessed.push(guessedLetter)
     console.log(lettersGuessed);
     // push guessedLetter into letters guessed
+
   }
 
   
@@ -122,10 +122,20 @@ function handleGuess() {
       
   }
   
-  function checkLoseCondition() {
-    //  if guessesRemaining <= 0 or the timer hits 0.
+  function checkLoseCondition() {           //  if guessesRemaining <= 0 or the timer hits 0.
+    if (remainingTime <= 0 || secretWord.includes(lettersGuessed)) {endgame == true
+      
+    }
   }
 
+
+let endgame = null
+
+
 /*----------- Event Listeners ----------*/
-// event listerners for buttons
-submitButton.addEventListener('click', handleGuess)
+submitButton.addEventListener('click', handleGuess); 
+
+resetButton.addEventListener('click', initializeGame);
+
+startTimerButton.addEventListener('click', startTimer); 
+

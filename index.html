@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>"The SuperSaiyan Man"</title>
+    <title>"What the heck Man?!"</title>
 </head>
 
 
@@ -12,39 +13,38 @@
     <div class="game-container">
         <!-- Game Header -->
         <header>
-            <h1 class="Page_Title">The SuperSaiyan Man</h1> 
-            <div id="Instructions"> 
-                <p><em>Guess the hidden word before the timer runs out</em>! 
-                <span id="time">120</span> seconds to guess the word until the timer runs out!!! 
-                Each incorrect guess will bring the superSaiyan closer to being fully drawn. Good luck!</p>
+            <h1 class="Page_Title">The SuperSaiyan Man</h1>
+            <div id="Instructions">
+                <p><em>Guess the hidden word before the timer runs out</em>!
+                    Each incorrect guess will bring the superSaiyan closer to being fully drawn. Good luck!</p>
             </div>
         </header>
-    
-        <div class="timer"  id="timer" >Time Remaining: 120s</div>                                   <!-- Timer-->
-       
+
+
+
+        <div class="timer" id="timer">Time Remaining: <span id="time">120</span>s</div>  
+        <div>seconds to guess the word until the timer runs out!!!</div>
+        
         <div class="form">
             <input type="text" id="guessInput" maxlength="1" placeholder="Your Letter Here" />
-            <button type="submit" id="submitButton">Guess</button>                                             <!-- Submit button -->
+            <button type="submit" id="submitButton">Guess</button> <!-- Submit button -->
         </div>
 
-        
-       <!-- Current Word Display -->
-       <div id="currentWord" class="current-word"></div>
 
-       <!-- Guessed Letters Display -->
-       <div id="guessedLetters" class="guessed-letters">Guessed Letters: None</div>
+        <!-- Current Word Display -->
+        <div id="currentWord" class="current-word"></div>
 
-       <!-- Feedback Display -->
-       <div id="feedback" class="feedback"></div>
+        <!-- Guessed Letters Display -->
+        <div id="guessedLetters" class="guessed-letters">Guessed Letters: _ </div>
 
-       <!-- Reset Button -->
-       <div class="controls">
-           <button id="resetButton" class="reset-button">Reset Game</button>
 
-        <!-- Spaceman Visual Representation -->
-        <canvas id="spacemanCanvas" width="200" height="250"></canvas>
-    </div>
+        <!-- Reset Button -->
+        <div class="controls">
+            <button id="resetButton" class="reset-button">Reset Game</button>
+            <canvas id="spacemanCanvas" width="200" height="250"></canvas>
+        </div>
 
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
+
 </html>
