@@ -1,21 +1,68 @@
-container {
-  display: flex;
-  flex-direction: column;
+body
+{
+  font-family:'JetBrains Mono Light', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0b3d91;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
-.container > .top {
-  flex: 0 0 100px;
+.header
+{
+  background-color: #1e3a8a;
+  padding: 20px;
 }
 
-.container > .content {
-  flex: 1 0 auto;
+.game-container
+{
+  margin: 20px;
 }
 
-body {
-  border: 2px;  
-  display: flex; /* or inline-flex */
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
+.timer-display
+{
+  margin-bottom: 20px;
+}
 
-  }
+.form input
+{
+  padding: 10px;
+  font-size: 16px;
+  width: 150px;
+  border: none;
+  border-radius: 5px;
+}
+
+.form button
+{
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fbbf24;
+  color: #000000;
+}
+
+.form button:hover
+{
+  background-color: #f59e0b;
+}
+
+.current-word,
+.guessed-letters,
+.feedback
+{
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+canvas
+{
+  display: block;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 10px;
+}

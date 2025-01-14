@@ -4,47 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The SuperSaiyan Challenge</title>
     <link rel="stylesheet" href="style.css">
-    <title>"What the heck Man?!"</title>
 </head>
 
-
 <body>
+    <header class="header">
+        <h1 id="page-title"><em>The SuperSaiyan Challenge</em></h1>
+        <h2>Instructions</h2><br>
+        <p id="Instructions">
+        <h3>Unleash your inner Saiyan by guessing the hidden Dragon Ball Z term before the timer runs out!</h3>
+        Each incorrect guess brings the SuperSaiyan closer to full transformation. Good luck!
+        </p><br>
+        <ul>
+            <li>Type your guess in the input box.</li>
+            <li>Click "Submit Guess" or press "Enter" to make a guess.</li>
+            <li>Use the timer to keep your energy high!</li>
+        </ul>
+    </header>
+
     <div class="game-container">
-        <!-- Game Header -->
-        <header>
-            <h1 class="Page_Title">The SuperSaiyan Man</h1>
-            <div id="Instructions">
-                <p><em>Guess the hidden word before the timer runs out</em>!
-                    Each incorrect guess will bring the superSaiyan closer to being fully drawn. Good luck!</p>
-            </div>
-        </header>
-
-
-
-        <div class="time" id="timer">Time Remaining: <span id="time">120</span>s</div>  
-        <div>seconds to guess the word until the timer runs out!!!</div>
-        
-        <div class="form">
-            <input type="text" id="guessInput" maxlength="1" placeholder="Your Letter Here" />
-            <button type="submit" id="submitButton">Guess</button> <!-- Submit button -->
+        <div class="timer-display">
+            <h2>Timer</h2>
+            <div id="timerDisplay">Time: 120s</div>
+            <button type="button" id="startButton">Start</button>
+            <button type="button" id="resetButton">Reset</button>
         </div>
 
+        <div class="form"><br>
+            <input type="text" id="guessInput" maxlength="1" placeholder="Enter Letter" />
+            <button type="button" id="submitButton">Submit Guess</button>
 
-        <!-- Current Word Display -->
-        <div id="currentWord" class="current-word"></div>
-
-        <!-- Guessed Letters Display -->
-        <div id="guessedLetters" class="guessed-letters">Guessed Letters: _ </div>
-
-
-        <!-- Reset Button -->
-        <div class="controls">
-            <button id="resetButton" class="reset-button">Reset Game</button>
-            <canvas id="spacemanCanvas" width="200" height="250"></canvas>
+            <div id="currentWord" class="current-word">_ _ _ _ _</div>
+            <div id="guessedLetters" class="guessed-letters">Guessed Letters: _</div>
+            <div id="feedback" class="feedback"></div>
         </div>
+    </div>
 
-        <script src="script.js"></script>
+    <canvas id="spacemanCanvas" width="200" height="200"></canvas>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
