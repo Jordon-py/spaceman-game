@@ -168,61 +168,6 @@ function startTimer() {                                           // Initiate Ti
 
 /*-------------- Canvas Drawing -------------*/
 
-function clearCanvas() {
-  ctx.clearRect(0, 0, spacemanCanvas.width, spacemanCanvas.height);
-}
-
-function drawSpaceman() {
-  // Simple example: Draw head and body incrementally
-  const step = lettersGuessed.length;
-  switch (step) {
-    case 1:
-      // Draw head
-      ctx.beginPath();
-      ctx.arc(100, 40, 10, 0, Math.PI * 2);
-      ctx.stroke();
-      break;
-    case 2:
-      // Draw body
-      ctx.beginPath();
-      ctx.moveTo(100, 50);
-      ctx.lineTo(100, 100);
-      ctx.stroke();
-      break;
-    case 3:
-      // Draw left arm
-      ctx.beginPath();
-      ctx.moveTo(100, 60);
-      ctx.lineTo(80, 80);
-      ctx.stroke();
-      break;
-    case 4:
-      // Draw right arm
-      ctx.beginPath();
-      ctx.moveTo(100, 60);
-      ctx.lineTo(120, 80);
-      ctx.stroke();
-      break;
-    case 5:
-      // Draw left leg
-      ctx.beginPath();
-      ctx.moveTo(100, 100);
-      ctx.lineTo(80, 130);
-      ctx.stroke();
-      break;
-    case 6:
-      // Draw right leg
-      ctx.beginPath();
-      ctx.moveTo(100, 100);
-      ctx.lineTo(120, 130);
-      ctx.stroke();
-      break;
-    default:
-      break;
-  }
-}
-
-/*-------------- Event Listeners -------------*/
 
 if (startButton === "click") {
   
