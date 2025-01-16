@@ -1,19 +1,16 @@
 /*-------------- Constants -------------*/
 
-/* -------------User's guess input---------------*/
+
 const guessedLettersDiv = document.getElementById('guessedLetters');
 const currentWordDiv = document.getElementById('currentWord');
-const submitButton = document.getElementById('submitButton').addEventListener('click',handleGuess);
-const guessInput = document.getElementById('guessInput').addEventListener('input', handleGuess);              
+const submitButton = document.getElementById('submitButton');
+const guessInput = document.getElementById('guessInput');
+const feedback = document.getElementById('feedback'); 
 
-
-const timerDisplay = document.getElementById('timerDisplay');                        /*------------- Start Timer Button ----------*/
-const startButton = document.getElementById('startButton').addEventListener('click', startTimer);  
-const resetButton = document.getElementById('resetButton').addEventListener('click', initializeGame);
-
-
-const spacemanCanvas = document.getElementById('spacemanCanvas');
-const ctx = spacemanCanvas.getContext('2d');
+// Timeer stuff
+const timerDisplay = document.getElementById('timerDisplay');
+const startButton = document.getElementById('startButton');
+const resetButton = document.getElementById('resetButton');
 
 const dbzWordList = [
   "kamehameha",
@@ -38,145 +35,160 @@ const dbzWordList = [
   "gogeta"
 ];
 
-/*---------- Variables (state) ---------*/
-
+/*---------- Variables (State) ---------*/
 let lettersGuessed = [];
-let secretWord = '';
+let secretWord = [];
 let remainingTime = 120;
 let timeInterval = null;
 let endgame = false;
-let startGameFlag = false;
+
+/*-------------- Event Listeners -------------*/
+// Ensure all event listeners pass functions as callbacks
+submitButton.addEventListener('click', handleGuess);
+guessInput.addEventListener('keypress', event => {
+  if (event.key === 'Enter') handleGuess(event);
+});
+startButton.addEventListener('click', startTimer);
+resetButton.addEventListener('click', initializeGame);
 
 /*-------------- Functions -------------*/
 
-function initializeGame(resetButton) {
+
+// Initializes or resets
+function initializeGame() {
   endgame = false;
-  startGameFlag = false;
   secretWord = getSecretWord().split('');
   lettersGuessed = [];
   remainingTime = 120;
   clearInterval(timeInterval);
 
-  
-  currentWordDiv.innerHTML = '';            // Clear previous displays
+  // Reset display areas
+  currentWordDiv.innerHTML = '';
   guessedLettersDiv.textContent = 'Guessed Letters: _';
-  clearCanvas();
-  console.log(`secretWord: ${secretWord}`);
+  feedback.textContent = '';
 
   // Display the secret word as underscores
-  secretWord.forEach((letter, i) => {
-    console.log(`${letter, i}`);
-    let letterSpan = document.createElement('span');
-    letterSpan.setAttribute('id', `letter-${i}`);
-    letterSpan.classList.add('letter');
-    letterSpan.textContent = '_ ';
-    currentWordDiv.appendChild(letterSpan);
+  secretWord.forEach((_, index) => {
+    const span = document.createElement('span');
+    span.id = `letter-${index}`;
+    span.className = 'letter';
+    span.textContent = '_ ';
+    currentWordDiv.appendChild(span);
   });
 
   // Reset the timer display
   timerDisplay.textContent = `Time: ${remainingTime}s`;
+
+  // Clear guess input field
+  guessInput.value = '';
 }
 
 
-// SECRET WORD ---------------------
-
+// Selects a random word from the word list. 
 function getSecretWord() {          
-  let randomIndex = Math.floor(Math.random() * dbzWordList.length);
-  let selectedWord = dbzWordList[randomIndex].toLowerCase();
-  return selectedWord;
+  const randomIndex = Math.floor(Math.random());// dbzWordList.length);
+  return dbzWordList[randomIndex].toLowerCase();
 }
-
-// ------ USER GUESS -------------------------
 
 function handleGuess(event) {
   if (endgame) return; // Prevent actions if the game has ended
-  if (event.type === 'click' || event.key === 'Enter') {
-    let guessedLetter = event.guessInput;
-    event.guessInput = ''; // Clear input field
-
   
-    lettersGuessed.push(guessedLetter);
-    updateGuessedLetters();
+  event.preventDefault(); // Prevent form submission if inside a form
 
-    if (secretWord.includes(guessedLetter)) {
-      revealLetters(guessedLetter);
-      feedbackDiv.textContent = `Nice! "${guessedLetter.toUpperCase()}" is in the word.`;
-      if (checkWinCondition()) {
-        endGame(true);
-      }
-    } else {
-      let wrong = guessedLetter.document.createElement(dispatchEvent, => );
-      drawSpaceman();
-      if (lettersGuessed.length >= secretWord.length + 5) { // Adjusted condition for losing
-        endGame(false);
-      }
-    }
+  const guessedLetter = guessInput.value.toLowerCase();
+
+  // Simple validation: single letter a-z
+  if (guessedLetter.length !== 1 || guessedLetter < 'a' || guessedLetter > 'z') {
+    feedback.textContent = 'Enter a single letter (A-Z).';
+    guessInput.value = '';
+    return;
   }
+
+  if (lettersGuessed.includes(guessedLetter)) {
+    feedback.textContent = `You already guessed "${guessedLetter.toUpperCase()}".`;
+    guessInput.value = '';
+    return;
+  }
+
+  lettersGuessed.push(guessedLetter);
+  updateGuessedLetters();
+
+  if (secretWord.includes(guessedLetter)) {
+    revealLetters(guessedLetter);
+    feedback.textContent = `"${guessedLetter.toUpperCase()}" is correct!`;
+    if (checkWinCondition()) endGame(true);
+  } else {
+    feedback.textContent = `"${guessedLetter.toUpperCase()}" is incorrect.`;
+    if (lettersGuessed.length >= secretWord.length + 5) endGame(false);
+  }
+
+  // Clear input field
+  guessInput.value = '';
 }
 
+
+// Updates the display
 function updateGuessedLetters() {
   guessedLettersDiv.textContent = `Guessed Letters: ${lettersGuessed.join(', ').toUpperCase()}`;
 }
 
+
+// Reveals the correctly guesletter - The corre
 function revealLetters(letter) {
-  secretWord.forEach((char, i) => {
+  secretWord.forEach((char, index) => {
     if (char === letter) {
-      let letterSpan = document.getElementById(`letter-${i}`);
-      letterSpan.textContent = `${char.toUpperCase()} `;
+      const span = document.getElementById(`letter-${index}`);
+      span.textContent = `${char.toUpperCase()} `;
     }
   });
 }
 
+
+// Checks if the user has guessed all letters correctly True if the user 
 function checkWinCondition() {
-  return secretWord.every((letter, i) => {
-    let letterSpan = document.getElementById(`letter-${i}`);
-    console.log(`Letter Span ${letterSpan}`);
-    return letterSpan.textContent.trim() === letter.toUpperCase();
+  return secretWord.every((char, index) => {
+    const span = document.getElementById(`letter-${index}`);
+    return span.textContent.trim() === char.toUpperCase();
   });
 }
 
+
+// Ends the  game 
 function endGame(won) {
   endgame = true;
   clearInterval(timeInterval);
   if (won) {
-    alert('Congratulations! You achieved SuperSaiyan status!');
+    feedback.textContent = 'You won! SuperSaiyan status achieved!';
   } else {
-    alert(`Game Over! The word was "${secretWord.join('').toUpperCase()}". Better luck next time!`);
+    feedback.textContent = `Game Over! The word was "${secretWord.join('').toUpperCase()}".`;
     revealAllLetters();
   }
 }
 
+
+// Reveals all letters of the secretword
 function revealAllLetters() {
-  secretWord.forEach((char, i) => {
-    let letterSpan = document.getElementById(`letter-${i}`);
-    letterSpan.textContent = `${char.toUpperCase()} `;
+  secretWord.forEach((char, index) => {
+    const span = document.getElementById(`letter-${index}`);
+    span.textContent = `${char.toUpperCase()} `;
   });
 }
 
-function startTimer() {                                           // Initiate Timer
+
+// Starts the game timer and game
+function startTimer() {
   if (timeInterval || endgame) return; // Prevent multiple intervals or starting after game ends
-  startGameFlag = true;
+  initializeGame();
+  startButton.disabled = true; // Disable the start button to prevent multiple starts
   timeInterval = setInterval(() => {
     remainingTime--;
     timerDisplay.textContent = `Time: ${remainingTime}s`;
     if (remainingTime <= 0) {
       clearInterval(timeInterval);
-      endGame(false); // Player loses
+      endGame(false);
     }
   }, 1000);
 }
 
-/*-------------- Canvas Drawing -------------*/
-
-
-if (startButton === "click") {
-  
-  initializeGame()
-  
-} else {
-  (resetButton === "click");
-  
-  {
-    initializeGame()
-  }  
-}
+/*-------------- Initialize Game on Load -------------*/
+// Removed automatic initialization to start the game with the Start Timer button
