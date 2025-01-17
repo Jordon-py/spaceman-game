@@ -1,6 +1,8 @@
 {
     "recommendations": [
         "dzhavat.git-cheatsheet",
-        "sidthesloth.html5-boilerplate"
+        "sidthesloth.html5-boilerplate",
+        "christian-kohler.npm-intellisense",
+        "ritwickdey.liveserver"
     ]
 }

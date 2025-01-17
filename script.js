@@ -1,18 +1,17 @@
-/*-------------- Constants -------------*/
-
-
+/*-------------- Constants -------------*/ 
+const lettr = document.getElementById('letter-0')
 const guessedLettersDiv = document.getElementById('guessedLetters');
 const currentWordDiv = document.getElementById('currentWord');
 const submitButton = document.getElementById('submitButton');
 const guessInput = document.getElementById('guessInput');
 const feedback = document.getElementById('feedback'); 
 
-// Timeer stuff
+// Timer stuff
 const timerDisplay = document.getElementById('timerDisplay');
 const startButton = document.getElementById('startButton');
 const resetButton = document.getElementById('resetButton');
 
-const dbzWordList = [
+let dbzWordList = [
   "kamehameha",
   "supersaiyan",
   "dragonball",
@@ -54,10 +53,11 @@ resetButton.addEventListener('click', initializeGame);
 /*-------------- Functions -------------*/
 
 
-// Initializes or resets
+// Initializes or resets the game
 function initializeGame() {
   endgame = false;
-  secretWord = getSecretWord().split('');
+  secretWord = getSecretWord().split(''); // Get a new secret word
+  console.log(secretWord);
   lettersGuessed = [];
   remainingTime = 120;
   clearInterval(timeInterval);
@@ -85,8 +85,9 @@ function initializeGame() {
 
 
 // Selects a random word from the word list. 
-function getSecretWord() {          
-  const randomIndex = Math.floor(Math.random());// dbzWordList.length);
+function getSecretWord() {
+  const randomIndex = Math.floor(Math.random() * dbzWordList.length);
+  console.log(randomIndex);
   return dbzWordList[randomIndex].toLowerCase();
 }
 
@@ -127,13 +128,13 @@ function handleGuess(event) {
 }
 
 
-// Updates the display
+// Updates the display of guessed letters
 function updateGuessedLetters() {
   guessedLettersDiv.textContent = `Guessed Letters: ${lettersGuessed.join(', ').toUpperCase()}`;
 }
 
 
-// Reveals the correctly guesletter - The corre
+// Reveals the correctly guessed letter(s)
 function revealLetters(letter) {
   secretWord.forEach((char, index) => {
     if (char === letter) {
@@ -144,7 +145,7 @@ function revealLetters(letter) {
 }
 
 
-// Checks if the user has guessed all letters correctly True if the user 
+// Checks if the user has guessed all letters correctly
 function checkWinCondition() {
   return secretWord.every((char, index) => {
     const span = document.getElementById(`letter-${index}`);
@@ -153,7 +154,7 @@ function checkWinCondition() {
 }
 
 
-// Ends the  game 
+// Ends the game
 function endGame(won) {
   endgame = true;
   clearInterval(timeInterval);
@@ -166,7 +167,7 @@ function endGame(won) {
 }
 
 
-// Reveals all letters of the secretword
+// Reveals all letters of the secret word
 function revealAllLetters() {
   secretWord.forEach((char, index) => {
     const span = document.getElementById(`letter-${index}`);
@@ -175,7 +176,7 @@ function revealAllLetters() {
 }
 
 
-// Starts the game timer and game
+// Starts the game timer and the game
 function startTimer() {
   if (timeInterval || endgame) return; // Prevent multiple intervals or starting after game ends
   initializeGame();
